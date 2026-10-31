@@ -1166,7 +1166,7 @@ private fun getFileVisuals(file: FileNode): Triple<ImageVector, Color, Color> {
 }
 
 @Composable
-private fun ZipBrowserDialog(archive: File, onDismiss: () -> Unit, onExtracted: () -> Unit) {
+fun ZipBrowserDialog(archive: File, onDismiss: () -> Unit, onExtracted: () -> Unit, extractionParent: File? = null) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     var entries by remember(archive) { mutableStateOf<List<String>>(emptyList()) }
@@ -1174,6 +1174,20 @@ private fun ZipBrowserDialog(archive: File, onDismiss: () -> Unit, onExtracted: 
     var busy by remember { mutableStateOf(true) }
     var message by remember { mutableStateOf<String?>(null) }
     var requestInstallPermission by remember { mutableStateOf(false) }
+    var requestStoragePermission by remember { mutableStateOf(false) }
+    if (requestStoragePermission) {
+        AlertDialog(
+            onDismissRequest = { requestStoragePermission = false },
+            title = { Text("Dosya erişimi") },
+            text = { Text("Dosyaları İndirilenler klasörüne çıkarmak için tüm dosyalara erişim izni gerekir. İzin verdikten sonra Tümünü çıkar seçeneğine tekrar dokunun.") },
+            confirmButton = { TextButton(onClick = {
+                requestStoragePermission = false
+                try { context.startActivity(Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, Uri.parse("package:${context.packageName}"))) }
+                catch (e: Exception) { message = "İzin ayarları açılamadı: ${e.message}" }
+            }) { Text("Ayarlara git") } },
+            dismissButton = { TextButton(onClick = { requestStoragePermission = false }) { Text("İptal") } }
+        )
+    }
     if (requestInstallPermission) {
         AlertDialog(
             onDismissRequest = { requestInstallPermission = false },
@@ -1194,6 +1208,10 @@ private fun ZipBrowserDialog(archive: File, onDismiss: () -> Unit, onExtracted: 
         busy = false
     }
     fun runAction(entry: String?) {
+        if (entry == null && extractionParent != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !android.os.Environment.isExternalStorageManager()) {
+            requestStoragePermission = true
+            return
+        }
         if (entry != null && entry.endsWith(".apk", ignoreCase = true) &&
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !context.packageManager.canRequestPackageInstalls()) {
             requestInstallPermission = true
@@ -1205,9 +1223,10 @@ private fun ZipBrowserDialog(archive: File, onDismiss: () -> Unit, onExtracted: 
             try {
                 val result = withContext(Dispatchers.IO) {
                     if (entry == null) {
-                        var dest = File(archive.parentFile, archive.nameWithoutExtension)
+                        val parent = extractionParent ?: archive.parentFile ?: error("Hedef bulunamadı")
+                        var dest = File(parent, archive.nameWithoutExtension)
                         var number = 1
-                        while (dest.exists()) dest = File(archive.parentFile, "${archive.nameWithoutExtension} (${number++})")
+                        while (dest.exists()) dest = File(parent, "${archive.nameWithoutExtension} (${number++})")
                         ZipService.extract(archive, dest)
                     } else {
                         val root = File(context.cacheDir, "archives")
@@ -1217,7 +1236,7 @@ private fun ZipBrowserDialog(archive: File, onDismiss: () -> Unit, onExtracted: 
                     }
                 }
                 if (entry == null) {
-                    message = "Çıkarıldı: ${result.name}"
+                    message = if (extractionParent != null) "İndirilenler/${result.name} klasörüne çıkarıldı" else "Çıkarıldı: ${result.name}"
                     onExtracted()
                 } else {
                     val ext = result.extension.lowercase()
