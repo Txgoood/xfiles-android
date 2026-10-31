@@ -13,7 +13,7 @@ class LocalFileService : IFileService {
         val directory = File(path)
         if (!directory.exists() || !directory.isDirectory) return emptyList()
 
-        val files = directory.listFiles() ?: return emptyList()
+        val files = directory.listFiles() ?: throw SecurityException("Klasöre erişilemiyor. Dosya erişim iznini kontrol edin.")
 
         return files.map { file ->
             val isDir = file.isDirectory

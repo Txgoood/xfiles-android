@@ -129,7 +129,7 @@ class XFilesViewModel : ViewModel() {
     private val _isGridView = MutableStateFlow(false)
     val isGridView: StateFlow<Boolean> = _isGridView.asStateFlow()
 
-    private val _showHiddenFiles = MutableStateFlow(false)
+    private val _showHiddenFiles = MutableStateFlow(true)
     val showHiddenFiles: StateFlow<Boolean> = _showHiddenFiles.asStateFlow()
 
     // Selection state

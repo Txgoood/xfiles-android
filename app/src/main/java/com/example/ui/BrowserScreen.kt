@@ -38,6 +38,13 @@ import com.example.viewmodel.FileUiState
 import com.example.viewmodel.SortMode
 import com.example.viewmodel.XFilesViewModel
 import java.io.File
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import com.example.data.service.ZipService
+import android.content.Intent
+import android.webkit.MimeTypeMap
+import androidx.core.content.FileProvider
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -63,6 +70,15 @@ fun BrowserScreen(
     val conflictState by viewModel.conflictState.collectAsState()
 
     val context = LocalContext.current
+
+    var archiveFile by remember { mutableStateOf<File?>(null) }
+    archiveFile?.let { file ->
+        ZipBrowserDialog(file, onDismiss = { archiveFile = null }, onExtracted = { viewModel.refresh() })
+    }
+    fun openNode(file: FileNode) {
+        if (file.name.endsWith(".zip", ignoreCase = true)) archiveFile = file.file
+        else viewModel.openFile(file, context)
+    }
 
     var showSearchInput by remember { mutableStateOf(false) }
     var showDeleteConfirmDialog by remember { mutableStateOf(false) }
@@ -753,7 +769,7 @@ fun BrowserScreen(
                                             } else if (file.isDirectory) {
                                                 viewModel.navigateToPath(file.path)
                                             } else {
-                                                viewModel.openFile(file, context)
+                                                openNode(file)
                                             }
                                         },
                                         onLongClick = { viewModel.toggleSelection(file) }
@@ -778,11 +794,11 @@ fun BrowserScreen(
                                             } else if (file.isDirectory) {
                                                 viewModel.navigateToPath(file.path)
                                             } else {
-                                                viewModel.openFile(file, context)
+                                                openNode(file)
                                             }
                                         },
                                         onLongClick = { viewModel.toggleSelection(file) },
-                                        onOpen = { viewModel.openFile(file, context) },
+                                        onOpen = { openNode(file) },
                                         onRename = {
                                             renameTargetFile = file
                                             renameInput = file.name
@@ -1143,4 +1159,71 @@ private fun getFileVisuals(file: FileNode): Triple<ImageVector, Color, Color> {
             else -> Triple(Icons.Default.Description, PrimaryContainer.copy(alpha = 0.2f), Primary)
         }
     }
+}
+
+@Composable
+private fun ZipBrowserDialog(archive: File, onDismiss: () -> Unit, onExtracted: () -> Unit) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    var entries by remember(archive) { mutableStateOf<List<String>>(emptyList()) }
+    var error by remember { mutableStateOf<String?>(null) }
+    var busy by remember { mutableStateOf(true) }
+    var message by remember { mutableStateOf<String?>(null) }
+    LaunchedEffect(archive) {
+        try { entries = withContext(Dispatchers.IO) { ZipService.entries(archive) } }
+        catch (e: Exception) { error = e.message ?: "ZIP açılamadı" }
+        busy = false
+    }
+    fun runAction(entry: String?) {
+        busy = true
+        scope.launch {
+            try {
+                val result = withContext(Dispatchers.IO) {
+                    if (entry == null) {
+                        var dest = File(archive.parentFile, archive.nameWithoutExtension)
+                        var number = 1
+                        while (dest.exists()) dest = File(archive.parentFile, "${archive.nameWithoutExtension} (${number++})")
+                        ZipService.extract(archive, dest)
+                    } else {
+                        val root = File(context.cacheDir, "archives")
+                        root.mkdirs()
+                        val dest = File(root, java.util.UUID.randomUUID().toString())
+                        ZipService.extract(archive, dest, entry)
+                    }
+                }
+                if (entry == null) {
+                    message = "Çıkarıldı: ${result.name}"
+                    onExtracted()
+                } else {
+                    val ext = result.extension.lowercase()
+                    val mime = MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext) ?: "application/octet-stream"
+                    val uri = FileProvider.getUriForFile(context, "${context.packageName}.provider", result)
+                    val intent = Intent(Intent.ACTION_VIEW).setDataAndType(uri, mime)
+                        .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    context.startActivity(Intent.createChooser(intent, "Dosyayı aç"))
+                }
+            } catch (e: Exception) { error = e.message ?: "İşlem başarısız" }
+            busy = false
+        }
+    }
+    AlertDialog(
+        onDismissRequest = { if (!busy) onDismiss() },
+        title = { Text(archive.name) },
+        text = {
+            Column {
+                if (busy) { LinearProgressIndicator(modifier = Modifier.fillMaxWidth()); Text("İşleniyor…") }
+                error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
+                message?.let { Text(it) }
+                if (!busy && error == null && entries.isEmpty()) Text("Arşiv boş")
+                LazyColumn(modifier = Modifier.heightIn(max = 360.dp)) {
+                    items(entries) { name ->
+                        Text(name, modifier = Modifier.fillMaxWidth().clickable(enabled = !busy && !name.endsWith('/')) { runAction(name) }.padding(vertical = 10.dp))
+                        HorizontalDivider()
+                    }
+                }
+            }
+        },
+        confirmButton = { TextButton(enabled = !busy && error == null, onClick = { runAction(null) }) { Text("Tümünü çıkar") } },
+        dismissButton = { TextButton(enabled = !busy, onClick = onDismiss) { Text("Kapat") } }
+    )
 }

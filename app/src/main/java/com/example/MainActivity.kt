@@ -3,6 +3,10 @@ package com.example
 import android.Manifest
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.Settings
+import android.content.Intent
+import android.net.Uri
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -24,6 +28,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.compose.runtime.DisposableEffect
 import com.example.ui.BrowserScreen
 import com.example.ui.HomeScreen
 import com.example.ui.SettingsScreen
@@ -43,6 +51,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             XFilesTheme {
                 val viewModel: XFilesViewModel = viewModel()
+
+                val lifecycleOwner = LocalLifecycleOwner.current
+                DisposableEffect(lifecycleOwner) {
+                    val observer = LifecycleEventObserver { _, event ->
+                        if (event == Lifecycle.Event.ON_RESUME) viewModel.refresh()
+                    }
+                    lifecycleOwner.lifecycle.addObserver(observer)
+                    onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
+                }
 
                 val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                     arrayOf(
@@ -64,7 +81,17 @@ class MainActivity : ComponentActivity() {
                 }
 
                 LaunchedEffect(Unit) {
-                    permissionLauncher.launch(permissions)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                        if (!Environment.isExternalStorageManager()) {
+                            val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,
+                                Uri.parse("package:$packageName"))
+                            try { startActivity(intent) } catch (_: Exception) {
+                                startActivity(Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION))
+                            }
+                        }
+                    } else {
+                        permissionLauncher.launch(permissions)
+                    }
                 }
 
                 var currentRoute by remember { mutableStateOf("home") }
