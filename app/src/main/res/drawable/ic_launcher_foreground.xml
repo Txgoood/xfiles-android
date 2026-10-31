@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Folder Back -->
+    <path
+        android:fillColor="#2563EB"
+        android:pathData="M30,34 L46,34 L52,40 L78,40 C80.2,40 82,41.8 82,44 L82,48 L26,48 L26,38 C26,35.8 27.8,34 30,34 Z" />
+    <!-- Folder Front Cover -->
+    <path
+        android:fillColor="#3B82F6"
+        android:pathData="M26,46 L82,46 C84.2,46 86,47.8 86,50 L84,72 C84,74.2 82.2,76 80,76 L28,76 C25.8,76 24,74.2 24,72 L26,46 Z" />
+    <!-- Stylized "X" Bolt / Monogram in center -->
+    <path
+        android:fillColor="#B4C5FF"
+        android:pathData="M48,54 L53,60 L48,66 L52,66 L55,62 L58,66 L62,66 L57,60 L62,54 L58,54 L55,58 L52,54 Z" />
+</vector>

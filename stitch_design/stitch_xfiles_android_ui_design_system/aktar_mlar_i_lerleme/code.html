@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="tr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary": "#002a78", "error": "#ffb4ab", "secondary-fixed": "#6ffbbe", "outline-variant": "#434655", "on-tertiary-container": "#f6edff", "inverse-on-surface": "#2e3036", "on-background": "#e1e2e9", "secondary": "#4edea3", "tertiary-container": "#7d4ce7", "surface-dim": "#101319", "primary-fixed-dim": "#b4c5ff", "surface-bright": "#36393f", "on-surface": "#e1e2e9", "inverse-surface": "#e1e2e9", "error-container": "#93000a", "surface-container-highest": "#32353a", "on-error-container": "#ffdad6", "tertiary-fixed": "#e9ddff", "tertiary-fixed-dim": "#d0bcff", "surface-container-high": "#272a2f", "inverse-primary": "#0053db", "primary-container": "#2563eb", "surface-container": "#1d2025", "secondary-fixed-dim": "#4edea3", "primary": "#b4c5ff", "on-primary-fixed-variant": "#003ea8", "on-tertiary-fixed": "#23005c", "on-primary-container": "#eeefff", "tertiary": "#d0bcff", "background": "#101319", "surface": "#101319", "on-tertiary": "#3c0091", "surface-variant": "#32353a", "surface-container-low": "#191c21", "on-secondary-fixed": "#002113", "on-secondary": "#003824", "on-surface-variant": "#c3c6d7", "surface-tint": "#b4c5ff", "primary-fixed": "#dbe1ff", "on-primary-fixed": "#00174b", "surface-container-lowest": "#0b0e13", "outline": "#8d90a0", "on-secondary-container": "#00311f", "on-error": "#690005", "secondary-container": "#00a572", "on-secondary-fixed-variant": "#005236", "on-tertiary-fixed-variant": "#5516be" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xs": "0.25rem", "space-sm": "0.5rem", "space-md": "0.75rem", "space-xl": "1.5rem", "space-lg": "1rem", "margin-tablet": "1.5rem", "gutter-tablet": "1rem", "margin": "1rem", "gutter": "0.75rem" }, "fontFamily": { "label-md": ["Inter"], "meta-mono-sm": ["JetBrains Mono"], "body-lg": ["Inter"], "headline-lg": ["Inter"], "headline-md": ["Inter"], "body-sm": ["Inter"], "title-md": ["Inter"], "headline-sm": ["Inter"], "body-md": ["Inter"], "headline-lg-mobile": ["Inter"], "meta-mono": ["JetBrains Mono"] }, "fontSize": { "label-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }], "meta-mono-sm": ["10px", { "lineHeight": "14px", "fontWeight": "500" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }], "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-lg-mobile": ["26px", { "lineHeight": "34px", "fontWeight": "700" }], "meta-mono": ["12px", { "lineHeight": "16px", "fontWeight": "500" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface font-body-md text-body-md flex flex-col min-h-screen antialiased selection:bg-primary selection:text-on-primary"><header class="fixed top-0 w-full z-50 pt-safe bg-surface-container/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.25)]"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm min-h-[48px]"><img alt="XFiles Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VyJBLV22T8eAbFmRLJxAzb3zisMGJgqHe9wFpaPG3gALwjrZ0tlxbfd-a8oD9QI09x81o2qBnD4EN2EuPgPcNwvdSp7htnkmUQYXb8u1xqxV3HCs72LyXE0AsUqcjB-_dBQKWvqHqUuDHT5B-smm-L8uawph5ys3-JHSvAabveV4ofzdhL001Svc_jG0S_heaSHZn8U3R2P5WRSC91npAS4Zz-qPmF50dxJIms3J2C"/><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight">XFiles</span><span class="text-outline font-body-sm text-body-sm">/</span><span class="font-title-md text-title-md text-on-surface truncate max-w-[120px]">Aktarımlar</span></div></div></div><div class="flex items-center gap-space-xs"><button aria-label="Ara" class="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/40 active:bg-surface-variant/70 transition-colors" type="button"><span class="material-symbols-outlined text-[24px]">search</span></button><button aria-label="Görünümü Değiştir" class="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/40 active:bg-surface-variant/70 transition-colors" type="button"><span class="material-symbols-outlined text-[24px]">grid_view</span></button><button aria-label="Diğer Seçenekler" class="min-w-[48px] min-h-[48px] flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/40 active:bg-surface-variant/70 transition-colors" type="button"><span class="material-symbols-outlined text-[24px]">more_vert</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-space-xs"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface"><div class="flex flex-col w-full">
+<!-- Status & Context Pill Header (Delightful live state badge) -->
+<div class="px-margin pt-space-md pb-space-sm flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
+</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-medium tracking-wide">Aktarım Yöneticisi</span>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-high px-2.5 py-1 rounded-full">
+<span class="material-symbols-outlined text-primary text-[14px]">speed</span>
+<span class="font-meta-mono-sm text-meta-mono-sm text-primary font-semibold">18.4 MB/sn</span>
+</div>
+</div>
+<!-- Filter Category Tabs (Horizontal Scrollable, 48dp Touch Targets) -->
+<div class="w-full overflow-x-auto no-scrollbar px-margin py-space-xs">
+<div class="flex items-center gap-space-sm min-w-max pb-space-xs">
+<button class="tab-btn min-h-[48px] px-4 rounded-xl flex items-center gap-space-xs bg-primary text-on-primary transition-all shadow-sm active:scale-95" data-filter="all" type="button">
+<span class="font-label-md text-label-md font-semibold">Tümü</span>
+<span class="px-1.5 py-0.5 rounded-full bg-on-primary/20 text-on-primary font-meta-mono-sm text-meta-mono-sm font-bold">4</span>
+</button>
+<button class="tab-btn min-h-[48px] px-4 rounded-xl flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all active:scale-95" data-filter="ongoing" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">sync</span>
+<span class="font-label-md text-label-md font-medium">Devam Eden</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-variant text-on-surface font-meta-mono-sm text-meta-mono-sm">2</span>
+</button>
+<button class="tab-btn min-h-[48px] px-4 rounded-xl flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all active:scale-95" data-filter="completed" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span>
+<span class="font-label-md text-label-md font-medium">Tamamlanan</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-variant text-on-surface font-meta-mono-sm text-meta-mono-sm">1</span>
+</button>
+<button class="tab-btn min-h-[48px] px-4 rounded-xl flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-all active:scale-95" data-filter="failed" type="button">
+<span class="material-symbols-outlined text-[18px] text-error">error</span>
+<span class="font-label-md text-label-md font-medium">Başarısız</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-variant text-on-surface font-meta-mono-sm text-meta-mono-sm">1</span>
+</button>
+</div>
+</div>
+<!-- Global Transfer Summary Hero Card -->
+<div class="px-margin my-space-sm">
+<div class="relative overflow-hidden bg-surface-container rounded-xl p-space-lg shadow-md">
+<!-- Ambient Backlight Gradient Decor -->
+<div class="absolute -right-10 -top-10 w-44 h-44 rounded-full bg-primary-container/15 blur-2xl pointer-events-none"></div>
+<div class="flex items-start justify-between relative z-10">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">swap_calls</span>
+<span class="font-label-md text-label-md font-semibold text-primary">Kuyrukta 2 Dosya</span>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface font-bold mt-0.5 tracking-tight">Aktif Aktarım</h2>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-highest px-3 py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">schedule</span>
+<span class="font-meta-mono text-meta-mono text-on-surface">1 dk 12 sn</span>
+</div>
+</div>
+<!-- Real-time metrics bar -->
+<div class="mt-space-md pt-space-sm grid grid-cols-2 gap-space-md">
+<div class="bg-surface-container-low p-2.5 rounded-lg flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">downloading</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Ortalama Hız</span>
+<span class="font-meta-mono text-meta-mono font-semibold text-on-surface truncate">18.4 MB/sn</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-2.5 rounded-lg flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">inventory_2</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Kalan Boyut</span>
+<span class="font-meta-mono text-meta-mono font-semibold text-on-surface truncate">1.33 GB</span>
+</div>
+</div>
+</div>
+<!-- Bulk Quick Actions (Minimum 48dp height) -->
+<div class="mt-space-lg flex items-center gap-space-sm pt-space-xs">
+<button class="flex-1 min-h-[48px] px-space-md rounded-xl bg-surface-container-highest hover:bg-surface-bright active:scale-95 text-on-surface flex items-center justify-center gap-1.5 font-label-md text-label-md font-semibold transition-all" id="btn-pause-all" type="button">
+<span class="material-symbols-outlined text-[20px] text-primary" id="icon-pause-all">pause_circle</span>
+<span id="text-pause-all">Tümünü Duraklat</span>
+</button>
+<button class="min-h-[48px] px-4 rounded-xl bg-error-container/25 hover:bg-error-container/40 active:scale-95 text-error flex items-center justify-center gap-1.5 font-label-md text-label-md font-semibold transition-all" id="btn-cancel-all" type="button">
+<span class="material-symbols-outlined text-[20px]">cancel</span>
+<span>Tümünü İptal Et</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Section Title & Counter -->
+<div class="px-margin pt-space-sm pb-space-xs flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">Aktarım Listesi</span>
+<span class="font-meta-mono-sm text-meta-mono-sm text-on-surface-variant">4 Dosya</span>
+</div>
+<!-- Cards Container -->
+<div class="px-margin flex flex-col gap-space-md pb-space-xl" id="transfer-cards-list">
+<!-- Card 1: Ongoing Video Copy -->
+<div class="transfer-card ongoing bg-surface-container-low rounded-xl p-space-md flex flex-col shadow-sm transition-all" id="item-video">
+<div class="flex items-start gap-space-sm">
+<!-- MIME Icon -->
+<div class="w-12 h-12 rounded-xl bg-tertiary-container/20 text-tertiary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[28px]">movie</span>
+</div>
+<!-- File Details & Path -->
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1">
+<h3 class="font-title-md text-title-md text-on-surface font-semibold truncate" title="4K_Dron_Cekimleri_Ham.mp4">4K_Dron_Cekimleri_Ham.mp4</h3>
+<span class="font-meta-mono-sm text-meta-mono-sm text-primary font-bold px-1.5 py-0.5 rounded bg-primary-container/20 flex-shrink-0">%67</span>
+</div>
+<div class="flex items-center gap-1 mt-0.5 text-on-surface-variant font-body-sm text-body-sm truncate">
+<span class="material-symbols-outlined text-[14px] flex-shrink-0 text-outline">folder_open</span>
+<span class="truncate">Dahili Depolama &gt; Videolar &gt; Ham</span>
+</div>
+</div>
+</div>
+<!-- Animated Progress Bar -->
+<div class="mt-space-md">
+<div class="w-full bg-surface-container-highest rounded-full h-2 overflow-hidden relative">
+<div class="bg-primary h-full rounded-full transition-all duration-300 relative" style="width: 67%;">
+<div class="absolute inset-0 bg-white/20 animate-pulse"></div>
+</div>
+</div>
+</div>
+<!-- Transfer Telemetry -->
+<div class="mt-2 flex items-center justify-between font-meta-mono-sm text-meta-mono-sm text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="text-on-surface font-medium">1.6 GB</span>
+<span>/</span>
+<span>2.4 GB</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-primary font-medium flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[13px]">speed</span>
+            24.1 MB/sn
+          </span>
+<span>•</span>
+<span>Kalan: 34 sn</span>
+</div>
+</div>
+<!-- Action Row with 48dp hitboxes -->
+<div class="mt-space-md flex items-center justify-end gap-space-sm pt-space-xs">
+<button aria-label="Duraklat" class="min-w-[48px] min-h-[48px] px-3.5 rounded-lg bg-surface-container hover:bg-surface-container-high active:scale-95 text-on-surface flex items-center justify-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">pause</span>
+<span class="font-label-md text-label-md font-medium">Duraklat</span>
+</button>
+<button aria-label="Aktarımı İptal Et" class="min-w-[48px] min-h-[48px] px-3 rounded-lg bg-surface-container hover:bg-error-container/20 text-on-surface-variant hover:text-error active:scale-95 flex items-center justify-center gap-1 transition-colors" onclick="dismissItem('item-video')" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+<span class="font-label-md text-label-md font-medium">İptal</span>
+</button>
+</div>
+</div>
+<!-- Card 2: Ongoing Archive Extraction -->
+<div class="transfer-card ongoing bg-surface-container-low rounded-xl p-space-md flex flex-col shadow-sm transition-all" id="item-zip">
+<div class="flex items-start gap-space-sm">
+<!-- MIME Icon -->
+<div class="w-12 h-12 rounded-xl bg-secondary-container/20 text-secondary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[28px]">folder_zip</span>
+</div>
+<!-- File Details & Path -->
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1">
+<h3 class="font-title-md text-title-md text-on-surface font-semibold truncate" title="Android_Studio_SDK_Yedek.zip">Android_Studio_SDK_Yedek.zip</h3>
+<span class="font-meta-mono-sm text-meta-mono-sm text-secondary font-bold px-1.5 py-0.5 rounded bg-secondary-container/20 flex-shrink-0">%37</span>
+</div>
+<div class="flex items-center gap-1 mt-0.5 text-on-surface-variant font-body-sm text-body-sm truncate">
+<span class="material-symbols-outlined text-[14px] flex-shrink-0 text-outline">unarchive</span>
+<span class="truncate">Dahili Depolama &gt; Geliştirici &gt; SDK</span>
+</div>
+</div>
+</div>
+<!-- Extraction Progress Bar (Secondary Tone) -->
+<div class="mt-space-md">
+<div class="w-full bg-surface-container-highest rounded-full h-2 overflow-hidden relative">
+<div class="bg-secondary h-full rounded-full transition-all duration-300" style="width: 37%;"></div>
+</div>
+</div>
+<!-- State Message & Size -->
+<div class="mt-2 flex items-center justify-between font-meta-mono-sm text-meta-mono-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[14px] animate-spin">sync</span>
+<span class="font-medium">Arşiv açılıyor...</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="text-on-surface font-medium">320 MB</span>
+<span>/</span>
+<span>850 MB</span>
+</div>
+</div>
+<!-- Action Row -->
+<div class="mt-space-md flex items-center justify-end gap-space-sm pt-space-xs">
+<button aria-label="İşlemi İptal Et" class="min-w-[48px] min-h-[48px] px-4 rounded-lg bg-surface-container hover:bg-error-container/20 text-on-surface-variant hover:text-error active:scale-95 flex items-center justify-center gap-1.5 transition-colors" onclick="dismissItem('item-zip')" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+<span class="font-label-md text-label-md font-medium">İptal Et</span>
+</button>
+</div>
+</div>
+<!-- Card 3: Completed PDF Transfer -->
+<div class="transfer-card completed bg-surface-container-low rounded-xl p-space-md flex flex-col shadow-sm transition-all" id="item-pdf">
+<div class="flex items-start gap-space-sm">
+<!-- MIME Icon -->
+<div class="w-12 h-12 rounded-xl bg-error-container/20 text-error flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[28px]">picture_as_pdf</span>
+</div>
+<!-- File Details & Success Status -->
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1">
+<h3 class="font-title-md text-title-md text-on-surface font-semibold truncate" title="Satis_Raporu_2024.pdf">Satis_Raporu_2024.pdf</h3>
+<span class="font-meta-mono-sm text-meta-mono-sm text-on-surface-variant flex-shrink-0">14.2 MB</span>
+</div>
+<div class="flex items-center gap-1.5 mt-1 text-secondary font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-medium">Başarıyla aktarıldı (12 sn önce)</span>
+</div>
+</div>
+</div>
+<!-- Post-transfer Action Row -->
+<div class="mt-space-md flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="min-w-[48px] min-h-[48px] px-3.5 rounded-lg bg-surface-container hover:bg-surface-container-high active:scale-95 text-on-surface flex items-center justify-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">folder</span>
+<span class="font-label-md text-label-md font-medium">Klasörde Göster</span>
+</button>
+<button class="min-w-[48px] min-h-[48px] px-4 rounded-lg bg-primary hover:bg-primary/90 text-on-primary active:scale-95 flex items-center justify-center gap-1.5 transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+<span class="font-label-md text-label-md font-semibold">Dosyayı Aç</span>
+</button>
+</div>
+</div>
+<!-- Card 4: Failed Transfer (Insufficient Storage Warning) -->
+<div class="transfer-card failed bg-surface-container-low rounded-xl p-space-md flex flex-col shadow-sm transition-all" id="item-disk">
+<div class="flex items-start gap-space-sm">
+<!-- MIME Icon -->
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest text-outline flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[28px]">hard_drive</span>
+</div>
+<!-- File Details & Error Header -->
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1">
+<h3 class="font-title-md text-title-md text-on-surface font-semibold truncate" title="Sanal_Makine_Disk.vmdk">Sanal_Makine_Disk.vmdk</h3>
+<span class="font-meta-mono-sm text-meta-mono-sm text-error font-semibold flex-shrink-0">12.8 GB</span>
+</div>
+<div class="flex items-center gap-1 mt-0.5 text-outline font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[14px]">storage</span>
+<span>Hedef: /storage/emulated/0/VMs</span>
+</div>
+</div>
+</div>
+<!-- Descriptive Human Error Alert Box -->
+<div class="mt-space-md bg-error-container/30 rounded-xl p-3 flex items-start gap-2.5">
+<span class="material-symbols-outlined text-error text-[20px] flex-shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">warning</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-error font-semibold">Aktarım Başarısız: Yetersiz Alan</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            Hedef sürücüde yeterli boş alan yok. <br class="hidden sm:inline"/>
+<span class="font-meta-mono-sm text-meta-mono-sm text-on-surface">(Gereken: 12.8 GB, Mevcut: 4.1 GB)</span>
+</span>
+</div>
+</div>
+<!-- Resolution Actions -->
+<div class="mt-space-md flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="min-w-[48px] min-h-[48px] px-3.5 rounded-lg bg-surface-container hover:bg-surface-container-high active:scale-95 text-on-surface flex items-center justify-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-tertiary">cleaning_services</span>
+<span class="font-label-md text-label-md font-medium">Alanı Temizle</span>
+</button>
+<button class="min-w-[48px] min-h-[48px] px-4 rounded-lg bg-surface-container-highest hover:bg-surface-bright active:scale-95 text-on-surface flex items-center justify-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">replay</span>
+<span class="font-label-md text-label-md font-semibold">Tekrar Dene</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Dynamic Empty State (Hidden initially, appears if all cards removed or filtered out) -->
+<div class="hidden px-margin py-12 flex flex-col items-center justify-center text-center" id="transfers-empty-state">
+<div class="w-20 h-20 rounded-full bg-surface-container-high flex items-center justify-center mb-space-md text-outline">
+<span class="material-symbols-outlined text-[40px]">inventory_2</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Seçilen Filtrede Aktarım Yok</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs mt-1">
+      Şu an bu kategoride bekleyen veya işlenen bir dosya bulunmuyor.
+    </p>
+<button class="mt-space-lg min-h-[48px] px-space-xl rounded-xl bg-surface-container-highest text-on-surface font-label-md text-label-md font-semibold active:scale-95 transition-all" onclick="resetFilters()" type="button">
+      Tüm Aktarımları Göster
+    </button>
+</div>
+</div>
+<script>
+  // Simple interactive filter tabs
+  const filterButtons = document.querySelectorAll('.tab-btn');
+  const cards = document.querySelectorAll('.transfer-card');
+  const emptyState = document.getElementById('transfers-empty-state');
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Toggle styles
+      filterButtons.forEach(b => {
+        b.classList.remove('bg-primary', 'text-on-primary', 'font-semibold');
+        b.classList.add('bg-surface-container', 'text-on-surface-variant');
+        const badge = b.querySelector('span:last-child');
+        if (badge) {
+          badge.classList.remove('bg-on-primary/20', 'text-on-primary', 'font-bold');
+          badge.classList.add('bg-surface-variant', 'text-on-surface');
+        }
+      });
+
+      btn.classList.add('bg-primary', 'text-on-primary', 'font-semibold');
+      btn.classList.remove('bg-surface-container', 'text-on-surface-variant');
+      const activeBadge = btn.querySelector('span:last-child');
+      if (activeBadge) {
+        activeBadge.classList.add('bg-on-primary/20', 'text-on-primary', 'font-bold');
+        activeBadge.classList.remove('bg-surface-variant', 'text-on-surface');
+      }
+
+      const filter = btn.getAttribute('data-filter');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        if (filter === 'all' || card.classList.contains(filter)) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (visibleCount === 0) {
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+      }
+    });
+  });
+
+  function resetFilters() {
+    const allBtn = document.querySelector('[data-filter="all"]');
+    if (allBtn) allBtn.click();
+  }
+
+  function dismissItem(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(12px)';
+      setTimeout(() => {
+        el.remove();
+        // check if all remaining cards are visible
+        const remaining = document.querySelectorAll('.transfer-card');
+        if (remaining.length === 0) {
+          emptyState.classList.remove('hidden');
+        }
+      }, 200);
+    }
+  }
+
+  // Toggle Bulk Pause
+  const pauseAllBtn = document.getElementById('btn-pause-all');
+  let isAllPaused = false;
+  if (pauseAllBtn) {
+    pauseAllBtn.addEventListener('click', () => {
+      isAllPaused = !isAllPaused;
+      const icon = document.getElementById('icon-pause-all');
+      const text = document.getElementById('text-pause-all');
+      if (isAllPaused) {
+        icon.textContent = 'play_circle';
+        text.textContent = 'Tümünü Devam Ettir';
+      } else {
+        icon.textContent = 'pause_circle';
+        text.textContent = 'Tümünü Duraklat';
+      }
+    });
+  }
+
+  // Cancel all interactive confirmation
+  const cancelAllBtn = document.getElementById('btn-cancel-all');
+  if (cancelAllBtn) {
+    cancelAllBtn.addEventListener('click', () => {
+      cards.forEach(c => {
+        if (c.classList.contains('ongoing')) {
+          c.remove();
+        }
+      });
+      const remaining = document.querySelectorAll('.transfer-card');
+      if (remaining.length === 0) {
+        emptyState.classList.remove('hidden');
+      }
+    });
+  }
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container/90 backdrop-blur-xl shadow-[0_-1px_12px_rgba(0,0,0,0.35)]" data-active-classes="text-primary [&amp;&gt;div:first-child]:bg-primary-container/20 [&amp;&gt;div:first-child]:text-primary font-semibold"><div class="flex items-center justify-around h-16 px-space-xs"><a class="group flex flex-col items-center justify-center min-w-[64px] min-h-[48px] py-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="ana-sayfa" href="#"><div class="flex items-center justify-center w-12 h-8 rounded-full transition-colors"><span class="material-symbols-outlined text-[24px]">home</span></div><span class="font-label-md text-label-md tracking-tight mt-0.5">Ana Sayfa</span></a><a class="group flex flex-col items-center justify-center min-w-[64px] min-h-[48px] py-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="dosyalar" href="#"><div class="flex items-center justify-center w-12 h-8 rounded-full transition-colors"><span class="material-symbols-outlined text-[24px]">folder</span></div><span class="font-label-md text-label-md tracking-tight mt-0.5">Dosyalar</span></a><a class="group flex flex-col items-center justify-center min-w-[64px] min-h-[48px] py-1 text-on-surface-variant hover:text-on-surface transition-colors relative" data-path="aktarimlar" href="#"><div class="flex items-center justify-center w-12 h-8 rounded-full transition-colors relative"><span class="material-symbols-outlined text-[24px]">swap_vert</span><span class="absolute top-1 right-2.5 w-2 h-2 rounded-full bg-secondary ring-2 ring-surface-container"></span></div><span class="font-label-md text-label-md tracking-tight mt-0.5">Aktarımlar</span></a><a class="group flex flex-col items-center justify-center min-w-[64px] min-h-[48px] py-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="ayarlar" href="#"><div class="flex items-center justify-center w-12 h-8 rounded-full transition-colors"><span class="material-symbols-outlined text-[24px]">settings</span></div><span class="font-label-md text-label-md tracking-tight mt-0.5">Ayarlar</span></a></div></nav></body></html>

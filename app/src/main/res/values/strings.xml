@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">XFiles</string>
+    <string name="storage_permission_denied">Dosyaları görüntülemek için izin gerekiyor.</string>
+    <string name="allow_access">İzin Ver</string>
+    <string name="internal_storage">Dahili Depolama</string>
+    <string name="home_title">XFiles</string>
+    <string name="search_files">Dosya ara...</string>
+    <string name="delete">Sil</string>
+    <string name="copy">Kopyala</string>
+    <string name="move">Taşı</string>
+    <string name="rename">Yeniden Adlandır</string>
+    <string name="share">Paylaş</string>
+    <string name="create_folder">Yeni Klasör</string>
+    <string name="error_operation_failed">İşlem başarısız oldu.</string>
+</resources>
