@@ -43,6 +43,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.example.data.service.ZipService
 import android.content.Intent
+import android.content.ClipData
+import android.os.Build
+import android.provider.Settings
+import android.net.Uri
 import android.webkit.MimeTypeMap
 import androidx.core.content.FileProvider
 
@@ -1169,12 +1173,33 @@ private fun ZipBrowserDialog(archive: File, onDismiss: () -> Unit, onExtracted: 
     var error by remember { mutableStateOf<String?>(null) }
     var busy by remember { mutableStateOf(true) }
     var message by remember { mutableStateOf<String?>(null) }
+    var requestInstallPermission by remember { mutableStateOf(false) }
+    if (requestInstallPermission) {
+        AlertDialog(
+            onDismissRequest = { requestInstallPermission = false },
+            title = { Text("Uygulama yükleme izni") },
+            text = { Text("APK kurmak için XFiles uygulamasına bu kaynaktan uygulama yükleme iznini verin. Ardından ZIP içindeki APK'ya yeniden dokunun.") },
+            confirmButton = { TextButton(onClick = {
+                requestInstallPermission = false
+                try {
+                    context.startActivity(Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:${context.packageName}")))
+                } catch (e: Exception) { error = "İzin ayarları açılamadı: ${e.message}" }
+            }) { Text("Ayarlara git") } },
+            dismissButton = { TextButton(onClick = { requestInstallPermission = false }) { Text("İptal") } }
+        )
+    }
     LaunchedEffect(archive) {
         try { entries = withContext(Dispatchers.IO) { ZipService.entries(archive) } }
         catch (e: Exception) { error = e.message ?: "ZIP açılamadı" }
         busy = false
     }
     fun runAction(entry: String?) {
+        if (entry != null && entry.endsWith(".apk", ignoreCase = true) &&
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !context.packageManager.canRequestPackageInstalls()) {
+            requestInstallPermission = true
+            return
+        }
+        error = null
         busy = true
         scope.launch {
             try {
@@ -1196,11 +1221,14 @@ private fun ZipBrowserDialog(archive: File, onDismiss: () -> Unit, onExtracted: 
                     onExtracted()
                 } else {
                     val ext = result.extension.lowercase()
-                    val mime = MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext) ?: "application/octet-stream"
+                    val mime = if (ext == "apk") "application/vnd.android.package-archive"
+                        else MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext) ?: "application/octet-stream"
                     val uri = FileProvider.getUriForFile(context, "${context.packageName}.provider", result)
                     val intent = Intent(Intent.ACTION_VIEW).setDataAndType(uri, mime)
                         .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                    context.startActivity(Intent.createChooser(intent, "Dosyayı aç"))
+                        .setClipData(ClipData.newRawUri("dosya", uri))
+                    if (ext == "apk") context.startActivity(intent)
+                    else context.startActivity(Intent.createChooser(intent, "Dosyayı aç"))
                 }
             } catch (e: Exception) { error = e.message ?: "İşlem başarısız" }
             busy = false
