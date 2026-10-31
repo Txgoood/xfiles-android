@@ -1226,7 +1226,7 @@ private fun ZipBrowserDialog(archive: File, onDismiss: () -> Unit, onExtracted: 
                     val uri = FileProvider.getUriForFile(context, "${context.packageName}.provider", result)
                     val intent = Intent(Intent.ACTION_VIEW).setDataAndType(uri, mime)
                         .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                        .setClipData(ClipData.newRawUri("dosya", uri))
+                        .apply { clipData = ClipData.newRawUri("dosya", uri) }
                     if (ext == "apk") context.startActivity(intent)
                     else context.startActivity(Intent.createChooser(intent, "Dosyayı aç"))
                 }
